@@ -15,6 +15,14 @@ express()
   .set('view engine', 'ejs')
   .get('/', (req, res) => res.render('pages/index'))
   .get('/cool', (req, res) => res.send(cool()))
+  app.get('/times', (req, res) => {
+    let result = ''
+    const times = process.env.TIMES || 5
+    for (i = 0; i < times; i++) {
+      result += i + ' '
+    }
+    res.send(result)
+  })
   .get('/db', async (req, res) => {
     try {
       const client = await pool.connect()
